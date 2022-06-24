@@ -1,0 +1,157 @@
+Pedro = Persona {
+    nombre = "Pedro",
+    edad = 30,
+    stress = 80,
+    preferencias = [],
+    amigos = []
+}
+
+Martin = Persona {
+    nombre = "Martin",
+    edad = 41,
+    stress = 80,
+    preferencias = [],
+    amigos = [Pedro]
+}
+
+Eduardo = Persona {
+    nombre = "Eduardo",
+    edad = 25,
+    stress = 10,
+    preferencias = [],
+    amigos = [Martin, Pedro]
+}
+
+pAnthony::Persona
+pAnthony = Persona {
+    nombre = "PAnthony",
+    edad = 25,
+    stress = 10,
+    preferencias = [socializar],
+    amigos = [persona1,persona3]
+}
+
+rigoberta::Persona
+rigoberta = Persona {
+    nombre = "Rigoberta",
+    edad = 45,
+    stress = 50,
+    preferencias = [socializar],
+    amigos = [persona1, persona2]
+}
+
+puntoDeScoring eduardo// 250
+
+puntoDeScoring martin// 41
+
+puntoDeScoring (Persona "Rigoberta" 31 2 [] [eduardo])//18
+
+
+--- Punto 2
+
+Integrante 1
+
+*Spec Library Spec> nombreFirme pAnthony
+True
+
+*Spec Library Spec> nombreFirme rigoberta
+False
+
+Integrante 2
+
+*Spec Library Spec> esInteresante pedro   
+False
+
+*Spec Library Spec> esInteresante pAnthony 
+True
+
+---Punto 3
+
+*Spec Library Spec> marDelPlata 1 persona1
+Persona {nombre = "Vanesa", edad = 20, stress = 30, preferencias = [<una función>], amigos = []}
+
+*Spec Library Spec> marDelPlata 3 (Persona "Fulanito" 18 50 [] [persona1])
+Persona {nombre = "Fulanito", edad = 18, stress = 32, preferencias = [], amigos = [Persona {nombre = "Vanesa", edad = 20, stress = 20, preferencias = [<una función>], amigos = []}]}
+
+*Spec Library Spec> marDelPlata 3 (Persona "Fulanito" 18 15 [] [persona1])
+Persona {nombre = "Fulanito", edad = 18, stress = 0, preferencias = [], amigos = [Persona {nombre = "Vanesa", edad = 20, stress = 20, preferencias = [<una función>], amigos = []}]}
+
+*Spec Library Spec> marDelPlata 3 (Persona "Fulanito" 45 50 [] [persona1])
+Persona {nombre = "Fulanito", edad = 45, stress = 30, preferencias = [], amigos = [Persona {nombre = "Vanesa", edad = 20, stress = 20, preferencias = [<una función>], amigos = []}]}
+
+*Spec Library Spec> lasToninas True (Persona "Fulanita" 30 75 [] [persona1])
+Persona {nombre = "Fulanita", edad = 30, stress = 37.5, preferencias = [], amigos = [Persona {nombre = "Vanesa", edad = 20, stress = 20, preferencias = [<una función>], amigos = []}]}
+
+*Spec Library Spec> lasToninas False (Persona "Fulanita" 30 75 [] [persona1])  
+Persona {nombre = "Fulanita", edad = 30, stress = 55, preferencias = [], amigos = [Persona {nombre = "Vanesa", edad = 20, stress = 20, preferencias = [<una función>], amigos = []}]}
+
+*Spec Library Spec> puertoMadryn persona1
+Persona {nombre = "Vanesa", edad = 20, stress = 0, preferencias = [<una función>], amigos = [Persona {nombre = "Juan", edad = 37, stress = 80, preferencias = [<una función>], amigos = []
+
+*Spec Library Spec> laAdela (Persona "Vanesa" 24 80 [] [])
+Persona {nombre = "Vanesa", edad = 24, stress = 80, preferencias = [], amigos = []}
+
+--PUNTO 4
+
+--Integrante 2
+*Spec Library Spec> desenchufarse (marDelPlata 1) persona1
+False
+
+*Spec Library Spec> desenchufarse (marDelPlata 3) (Persona "Vanesa" 24 40 [] [])
+True
+
+*Spec Library Spec> enchufarseEspecial 20 (marDelPlata 3) (Persona "Vanesa" 24 40 [] [pedro])
+True
+
+*Spec Library Spec> enchufarseEspecial 20 (marDelPlata 3) (Persona "Vanesa" 24 45 [] [pedro])
+False
+
+--Integrante 1
+
+*Spec Library Spec> socializar puertoMadryn (Persona "Vanesa" 24 40 [] [pAnthony])
+True
+
+*Spec Library Spec> socializar laAdela  (Persona "Vanesa" 24 40 [] [pAnthony])    
+False
+
+*Spec Library Spec> sinPretenciones laAdela (Persona "Vanesa" 24 49 [] [pAnthony])
+True
+
+
+
+
+------------------------------TP 2
+
+----------------------- Punto 5
+*Spec Library Spec> destinoApto [(Persona "Ariel" 21 45 [desenchufarse, socializar] []), (Persona "Pedro" 38 50 [sinPretenciones] [])] (marDelPlata 3)
+True
+
+*Spec Library Spec> destinoApto [(Persona "Carola" 21 45 [socializar] []), (Persona "Pedro" 38 50 [enchufarseEspecial 10] []) ] (marDelPlata 3) 
+False
+
+*Spec Library Spec> destinoPiola' [(Persona "Carola" 21 45 [socializar] []), (Persona "Pedro" 38 35 [enchufarseEspecial 10] []) ] (marDelPlata 3)
+True
+
+*Spec Library Spec> destinoPiola' [(Persona "Carola" 21 45 [socializar] []), (Persona "Pedro" 38 35 [enchufarseEspecial 10] []) ] (marDelPlata 1)
+False
+----------------------- Punto 6
+
+*Spec Library Spec> stressDeUnPaquete [(marDelPlata 3), laAdela, (lasToninas False)] (Persona "Gustavo" 25 90 [] [])
+50
+
+*Spec Library Spec> stressDeUnPaquete [] (Persona "Gustavo" 25 90 [] [])
+90
+
+----------------------- Punto 7
+
+*Spec Library Spec> contingenteTOC [persona1] // puntoDeScoring persona1 -> 400
+True
+
+*Spec Library Spec> contingenteTOC [pAnthony]  // puntoDeScoring pAnthony -> 351
+True
+
+*Spec Library Spec> contingenteTOC [(Persona "Fabiana" 41 50 [] [juan]), (Persona "Rigoberta" 31 20 [] [juan]), (Persona "Veronica" 11 51 [] [juan]), juan]
+True
+
+*Spec Library Spec> contingenteTOC [juan, (Persona "Fabiana" 41 50 [] [juan]), (Persona "Rigoberta" 31 20 [] [juan])]                                      
+False
